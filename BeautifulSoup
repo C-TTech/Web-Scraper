@@ -1,0 +1,109 @@
+
+# Sentdex Scrapes for content Body Paragraph text
+import requests
+import urllib.request
+from bs4 import BeautifulSoup
+
+url = urllib.request.urlopen("https://").read()
+soup = BeautifulSoup(url, features="html.parser")
+
+nav = soup.nav
+
+# Finds URLs
+for url in nav.find_all('a'):
+    print(url.get('href'))
+
+# finds paragraph text
+body = soup.body
+for paragraph in body.find_all('p'):
+    print(paragraph.text)
+
+# Finds all text between div text
+for div in soup.find_all('div', class_='body'):
+    print(div.text)
+
+
+'''
+
+WORKED GOOD
+
+from typing import Union
+
+import requests
+from bs4 import BeautifulSoup, NavigableString
+
+URL = 'https://www.amazon.co.uk/gp/product/'
+
+headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36'}
+
+
+def check_page():
+    page = requests.get(URL, headers=headers)
+
+    soup1 = BeautifulSoup(page.content, "html.parser")
+    soup2 = BeautifulSoup(soup1.prettify(), "html.parser")
+
+    title = soup2.find(id= "productTitle")
+    price = soup2.find(id="price_inside_buybox").get_text()
+
+    print(title)
+    print(price)
+
+check_page()
+'''
+
+
+
+
+'''
+from typing import List, Any
+
+import requests
+from bs4 import BeautifulSoup
+
+result = requests.get("http://www./")
+src = result.content
+soup = BeautifulSoup(src, features="html.parser")
+
+urls= []
+for h2_tag in soup.find_all("h2"):
+    a_tag = h2_tag.find('a')
+    urls.append(a_tag.attrs['href'])
+
+print(urls)
+
+
+
+
+
+
+import requests
+from bs4 import BeautifulSoup
+#variable
+result = requests.get("https://")
+
+print(result.status_code)
+
+
+#print(result.headers)
+
+# variable
+src = result.content
+
+print(src)
+
+soup = BeautifulSoup(src, features="html.parser")
+
+# variable. find all links
+links = soup.find_all("a")
+#print(links)
+#print("\n")
+
+for link in links:
+    if "About" in link.text:
+        print(link)
+        print(link.attrs['href'])
+'''
+
+
+
